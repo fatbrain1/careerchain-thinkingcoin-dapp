@@ -1,2 +1,2 @@
 # carrerchain-thinkingcoin-dapp
-building smart reccretment App along with blockchain incentives for job seekers.
+building smart recuretment App along with blockchain incentives for job seekers with Ai friendly emberila
