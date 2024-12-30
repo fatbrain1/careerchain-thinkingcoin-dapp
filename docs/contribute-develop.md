@@ -66,7 +66,7 @@ Are you passionate about blockchain, AI, or career-tech? Join our growing commun
 
 For any questions or to discuss your ideas:
 - Email: [mansjobs@icloud.com](mailto:contribute@careerchain.com)
-- Community Chat: [Join our Discord](https://discord.gg/fatbrain01)
+- Community Chat: [Join our Discord](https://discord.gg/qQZnBwuC)
 
 ---
 
