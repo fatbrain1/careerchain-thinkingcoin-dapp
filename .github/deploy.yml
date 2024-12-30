@@ -1,1 +1,53 @@
 
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main # Trigger deployment on push to the 'main' branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      # Step 2: Set up Node.js
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18' # Specify the Node.js version
+          cache: 'yarn' # Cache dependencies
+
+      # Step 3: Install dependencies
+      - name: Install Dependencies
+        run: |
+          yarn install # Or 'npm install' if using npm
+
+      # Step 4: Deploy smart contracts
+      - name: Deploy Contracts
+        env:
+          INFURA_API_KEY: ${{ secrets.INFURA_API_KEY }}
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+        run: |
+          npx hardhat run scripts/deploy.js --network polygon_mumbai
+
+      # Step 5: Build frontend
+      - name: Build Frontend
+        run: |
+          cd frontend
+          yarn install
+          yarn build
+
+      # Step 6: Deploy frontend to hosting platform (Netlify, Vercel, etc.)
+      - name: Deploy to Netlify
+        uses: nwtgck/actions-netlify@v2.0
+        with:
+          publish-dir: ./frontend/build
+          production-deploy: true
+        env:
+          NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+          NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
